@@ -14,33 +14,23 @@ Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Dat
 Loading E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.053 seconds
+- Completed reload, in  0.047 seconds
 Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.739985 ms
+UnloadTime: 0.692098 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.538998 ms
+UnloadTime: 3.620115 ms
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 752.
-Total: 0.313522 ms (FindLiveObjects: 0.034936 ms CreateObjectMapping: 0.013854 ms MarkObjects: 0.254191 ms  DeleteObjects: 0.009938 ms)
-
-Portal spawn points: 32
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.279889 ms
-
-Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 752.
-Total: 0.377371 ms (FindLiveObjects: 0.057825 ms CreateObjectMapping: 0.019877 ms MarkObjects: 0.254793 ms  DeleteObjects: 0.044272 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 753.
+Total: 0.387611 ms (FindLiveObjects: 0.031924 ms CreateObjectMapping: 0.013251 ms MarkObjects: 0.333399 ms  DeleteObjects: 0.008734 ms)
 
 Portal spawn points: 32
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 11d4 -> priority: 1 
+  Thread -> id: 2204 -> priority: 1 

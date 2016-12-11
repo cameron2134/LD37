@@ -13,7 +13,7 @@ public class Portal : MonoBehaviour {
         source.Play();
         GameObject[] portals = GameObject.FindGameObjectsWithTag("Portal");
 
-        tank.transform.position = portals[Random.Range(0, portals.Length - 1)].transform.position;
+        tank.transform.position = portals[Random.Range(0, portals.Length)].transform.position;
 
 
     }
@@ -46,8 +46,5 @@ public class Portal : MonoBehaviour {
         Invoke("Die", 8f);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
