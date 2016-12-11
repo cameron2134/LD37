@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour {
     public float moveSpeed;
     public GameObject shell;
     public Transform bulletSpawn;
+    public AudioClip clip, clip2;
 
 
     private int health = 3;
@@ -17,7 +18,10 @@ public class EnemyController : MonoBehaviour {
     private SpriteRenderer rend;
 
 
-    private bool canShoot = true;
+    private AudioSource source;
+
+
+    private bool canShoot = true, playerDead = false;
 
     private GameObject player;
 
@@ -25,7 +29,8 @@ public class EnemyController : MonoBehaviour {
 
 
     private void Fire() {
-        Debug.Log("Firing");
+        source.clip = clip;
+        source.Play();
         GameObject bullet = (GameObject)Instantiate(shell, bulletSpawn.position, bulletSpawn.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
 
@@ -40,35 +45,38 @@ public class EnemyController : MonoBehaviour {
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
         }
 
-        canShoot = false;
-        StartCoroutine(BulletCooldown());
     }
 
 
 
-
-    IEnumerator BulletCooldown() {
-
-        yield return new WaitForSeconds(1);
-        canShoot = true;
-    }
 
 
 
     public void TakeDamage() {
-
+        
         StartCoroutine(FlashDamage());
         this.health--;
 
+        
+
         if (this.health <= 0) {
+            StartCoroutine(WaitForAudio());
             GameManager.Instance.OnEnemyKilled();
-            Destroy(this.gameObject);
+            
+            
         }
 
         
         
     }
 
+
+
+    IEnumerator WaitForAudio() {
+        this.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds(clip2.length);
+        Destroy(this.gameObject);
+    }
 
 
     IEnumerator FlashDamage() {
@@ -78,68 +86,79 @@ public class EnemyController : MonoBehaviour {
     }
 
 
+
+    private void OnPlayerDeath() {
+        this.enabled = false;
+    }
+
+
+
+    void OnDestroy() {
+        GameManager.Instance.PlayerDied -= OnPlayerDeath;
+    }
+
+
     // Use this for initialization
     void Start() {
+
+        source = GetComponent<AudioSource>();
+        source.clip = clip;
+
+        GameManager.Instance.PlayerDied += OnPlayerDeath;
+
         tankBody = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
         rend = this.GetComponent<SpriteRenderer>();
 
         this.player = GameObject.Find("Player");
+
+        InvokeRepeating("Fire", 0, Random.Range(1f, 3f));
     }
 
     // Update is called once per frame
     void Update() {
-        this.GetComponent<Animator>().SetBool("Moving", true);  
-        float step = moveSpeed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
-       
-        if (transform.position.x > Vector3.forward.x) {
-            this.GetComponent<SpriteRenderer>().flipX = true;
+
+        if (!playerDead) {
+
             this.GetComponent<Animator>().SetBool("Moving", true);
+            float step = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+            if (transform.position.x > Vector3.forward.x) {
+
+                this.tankBody.velocity = new Vector3(this.tankBody.velocity.x, this.tankBody.velocity.y, -1);
+                this.GetComponent<SpriteRenderer>().flipX = true;
+                this.GetComponent<Animator>().SetBool("Moving", true);
+            }
+
+            else if (transform.position.x < Vector3.forward.x) {
+                this.tankBody.velocity = new Vector3(this.tankBody.velocity.x, this.tankBody.velocity.y, 1);
+                this.GetComponent<SpriteRenderer>().flipX = false;
+            }
+
+
         }
-
-        else if (transform.position.x < Vector3.forward.x) {
-            this.GetComponent<SpriteRenderer>().flipX = false;
-        }
-
-
-
         
             
 
     }
 
 
-    void FixedUpdate() {
-
-        if (this.GetComponent<SpriteRenderer>().flipX == false) {
-
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right);
-            if (hit.collider.tag == "Player") {
-                Fire();
-            }
-
-        }
-
-        else {
-
-            // Check if player is infront. If they are, shoot
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left);
-            if (hit.collider.tag == "Player") {
-                Fire();
-            }
-
-        }
-        
-
-    }
 
 
 
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag == "PlayerBullet") {
+        if (other.gameObject.tag == "Bullet") {
             TakeDamage();
+            source.clip = clip2;
+            source.Play();
         }
+
+        if (other.gameObject.tag == "Wall")
+            this.transform.position = new Vector2(Random.Range(-6, 6), Random.Range(2, 5));
+
+        if (other.gameObject.tag == "Trap")
+            TakeDamage();
     }
 
 

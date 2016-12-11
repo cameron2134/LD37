@@ -22,7 +22,7 @@ public class PortalController : MonoBehaviour {
         if (activePortals.Count < PORTAL_LIMIT) {
 
             int index = Random.Range(0, portalSpawnPoints.Count);
-            Debug.Log("Spawning portal at " + index);
+            
             // spawn portal
 
             
@@ -45,8 +45,7 @@ public class PortalController : MonoBehaviour {
             usedPortalSpawns.Add(index);
         }
 
-        else
-            Debug.Log("PORTAL LIMIT REACHED");
+
 
     }
 
@@ -56,7 +55,7 @@ public class PortalController : MonoBehaviour {
     // Remove the portal entry from the list, let a new one be spawned
     private void OnPortalDeath(GameObject portal) {
 
-        Debug.Log("Returning " + portal.GetComponent<Portal>().GetIndex());
+        
         activePortals.Remove(portal);
         usedPortalSpawns.Remove(portal.GetComponent<Portal>().GetIndex());
     }

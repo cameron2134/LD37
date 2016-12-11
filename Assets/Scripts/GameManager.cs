@@ -20,6 +20,36 @@ public class GameManager : MonoBehaviour {
 
 
 
+
+    public delegate void TrapDied();
+    public event TrapDied TrapExpired;
+
+    public void OnTrapDeath() {
+
+        if (TrapExpired != null)
+            TrapExpired();
+        else
+            Debug.Log("No subscribers to TrapExpired");
+
+    }
+
+
+
+
+    public delegate void PlayerDeath();
+    public event PlayerDeath PlayerDied;
+
+    public void OnPlayerDied() {
+
+        if (PlayerDied != null)
+            PlayerDied();
+        else
+            Debug.Log("No subscribers to PlayerDied");
+
+    }
+
+
+
     public delegate void EnemyKilled();
     public event EnemyKilled EnemyWasKilled;
 
