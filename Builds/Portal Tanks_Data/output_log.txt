@@ -14,33 +14,33 @@ Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Dat
 Loading E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.045 seconds
+- Completed reload, in  0.053 seconds
 Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: E:\Documents\Unity Projects\QaziJam 9\Builds\Portal Tanks_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.697519 ms
+UnloadTime: 0.739985 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.648425 ms
+UnloadTime: 4.538998 ms
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 723.
-Total: 0.288223 ms (FindLiveObjects: 0.030117 ms CreateObjectMapping: 0.014456 ms MarkObjects: 0.234012 ms  DeleteObjects: 0.009035 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 752.
+Total: 0.313522 ms (FindLiveObjects: 0.034936 ms CreateObjectMapping: 0.013854 ms MarkObjects: 0.254191 ms  DeleteObjects: 0.009938 ms)
 
 Portal spawn points: 32
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.198271 ms
+UnloadTime: 2.279889 ms
 
-Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 723.
-Total: 0.392430 ms (FindLiveObjects: 0.059632 ms CreateObjectMapping: 0.014155 ms MarkObjects: 0.264431 ms  DeleteObjects: 0.053609 ms)
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 752.
+Total: 0.377371 ms (FindLiveObjects: 0.057825 ms CreateObjectMapping: 0.019877 ms MarkObjects: 0.254793 ms  DeleteObjects: 0.044272 ms)
 
 Portal spawn points: 32
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 28d8 -> priority: 1 
+  Thread -> id: 11d4 -> priority: 1 

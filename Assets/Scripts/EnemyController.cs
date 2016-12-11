@@ -8,6 +8,10 @@ public class EnemyController : MonoBehaviour {
     public Transform bulletSpawn;
     public AudioClip clip, clip2;
 
+    public GameObject muzzleFlash;
+
+    public AnimationClip deathClip, muzzleClip;
+
 
     private int health = 3;
 
@@ -31,6 +35,9 @@ public class EnemyController : MonoBehaviour {
     private void Fire() {
         source.clip = clip;
         source.Play();
+
+        StartCoroutine(MuzzleFlash());
+
         GameObject bullet = (GameObject)Instantiate(shell, bulletSpawn.position, bulletSpawn.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
 
@@ -48,7 +55,15 @@ public class EnemyController : MonoBehaviour {
     }
 
 
+    IEnumerator MuzzleFlash() {
 
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(muzzleClip.length);
+        muzzleFlash.SetActive(false);
+
+
+
+    }
 
 
 
@@ -61,6 +76,8 @@ public class EnemyController : MonoBehaviour {
 
         if (this.health <= 0) {
             StartCoroutine(WaitForAudio());
+            this.transform.FindChild("EnemyDeath").gameObject.SetActive(true);
+            
             GameManager.Instance.OnEnemyKilled();
             
             
@@ -77,6 +94,9 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitForSeconds(clip2.length);
         Destroy(this.gameObject);
     }
+
+
+    
 
 
     IEnumerator FlashDamage() {
