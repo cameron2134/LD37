@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed;
     public GameObject shell;
     public Transform bulletSpawn;
+    public GameObject muzzleFlash;
+    public AnimationClip muzzleClip;
+
     public AudioClip clip;
 
 
@@ -32,6 +35,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Fire() {
         source.Play();
+        StartCoroutine(MuzzleFlash());
+
         GameObject bullet = (GameObject) Instantiate(shell, bulletSpawn.position, bulletSpawn.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
 
@@ -51,6 +56,17 @@ public class PlayerController : MonoBehaviour {
     }
 
 
+
+
+    IEnumerator MuzzleFlash() {
+
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(muzzleClip.length);
+        muzzleFlash.SetActive(false);
+
+
+
+    }
 
 
     IEnumerator BulletCooldown() {
