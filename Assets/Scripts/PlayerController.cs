@@ -28,13 +28,13 @@ public class PlayerController : MonoBehaviour {
 
         if (!rend.flipX) {
             
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(20, 0);
         }
 
         else {
             
             bullet.GetComponent<SpriteRenderer>().flipX = true;
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 0);
         }
 
         canShoot = false;

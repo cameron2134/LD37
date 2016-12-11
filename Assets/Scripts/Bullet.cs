@@ -28,17 +28,18 @@ public class Bullet : MonoBehaviour {
         if (other.gameObject.tag == "Wall")
             Die();
 
+        else if (other.gameObject.tag == "Enemy") {
+            Die();
+        }
     }
 
 
     void OnTriggerEnter2D(Collider2D other) {
 
-        if (other.tag == "Portal") {
-
-
+        if (other.tag == "Portal") 
             other.GetComponent<Portal>().PortalTank(this.gameObject);
 
-        }
+        
     }
 
 }

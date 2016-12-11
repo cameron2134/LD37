@@ -20,6 +20,18 @@ public class GameManager : MonoBehaviour {
 
 
 
+    public delegate void EnemyKilled();
+    public event EnemyKilled EnemyWasKilled;
+
+    public void OnEnemyKilled() {
+        if (EnemyWasKilled != null)
+            EnemyWasKilled();
+        else
+            Debug.Log("No subscribers to EnemyWasKilled");
+    }
+
+
+
 
     void Awake() {
         if (Instance == null)

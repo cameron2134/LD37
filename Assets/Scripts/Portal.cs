@@ -38,7 +38,7 @@ public class Portal : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Invoke("Die", 4f);
+        Invoke("Die", 8f);
 	}
 	
 	// Update is called once per frame

@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour {
     public Transform bulletSpawn;
 
 
+    private int health = 3;
+
     private float moveX, moveY;
 
     private Animator anim;
@@ -23,7 +25,7 @@ public class EnemyController : MonoBehaviour {
 
 
     private void Fire() {
-
+        Debug.Log("Firing");
         GameObject bullet = (GameObject)Instantiate(shell, bulletSpawn.position, bulletSpawn.rotation);
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
 
@@ -53,6 +55,28 @@ public class EnemyController : MonoBehaviour {
 
 
 
+    public void TakeDamage() {
+
+        StartCoroutine(FlashDamage());
+        this.health--;
+
+        if (this.health <= 0) {
+            GameManager.Instance.OnEnemyKilled();
+            Destroy(this.gameObject);
+        }
+
+        
+        
+    }
+
+
+
+    IEnumerator FlashDamage() {
+        this.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        this.GetComponent<Renderer>().material.color = Color.white;
+    }
+
 
     // Use this for initialization
     void Start() {
@@ -65,21 +89,58 @@ public class EnemyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        this.GetComponent<Animator>().SetBool("Moving", true);  
         float step = moveSpeed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+       
+        if (transform.position.x > Vector3.forward.x) {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+            this.GetComponent<Animator>().SetBool("Moving", true);
+        }
 
+        else if (transform.position.x < Vector3.forward.x) {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+
+
+        
+            
 
     }
 
 
     void FixedUpdate() {
 
-        //tankBody.velocity = new Vector2(moveX * moveSpeed, moveY * moveSpeed);
+        if (this.GetComponent<SpriteRenderer>().flipX == false) {
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right);
+            if (hit.collider.tag == "Player") {
+                Fire();
+            }
+
+        }
+
+        else {
+
+            // Check if player is infront. If they are, shoot
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left);
+            if (hit.collider.tag == "Player") {
+                Fire();
+            }
+
+        }
+        
 
     }
 
 
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "PlayerBullet") {
+            TakeDamage();
+        }
+    }
 
 
     void OnTriggerEnter2D(Collider2D other) {
